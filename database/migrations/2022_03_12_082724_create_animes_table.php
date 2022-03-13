@@ -18,9 +18,9 @@ return new class extends Migration
             $table->timestamps();
             $table->string('title', 255);
             $table->text('description_0');
-            $table->text('description_1');
-            $table->text('description_2');
-            $table->string('characters');
+            $table->text('description_1')->nullable();
+            $table->text('description_2')->nullable();
+            $table->string('characters')->nullable();
             $table->string('episodes')->nullable();
             $table->json('css_id')->nullable();
             $table->json('images_id')->nullable();

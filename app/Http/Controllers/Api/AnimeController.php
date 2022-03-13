@@ -8,56 +8,40 @@ use Illuminate\Http\Request;
 
 class AnimeController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         return Anime::all();
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+
+        $anime = new Anime();
+        $anime->title = $data['title'];
+        $anime->description_0 = $data['description_0'];
+        $anime->description_1 = $data['description_1'] ?? null;
+        $anime->description_2 = $data['description_2'] ?? null;
+        $anime->characters = $data['characters'] ?? null;
+        $anime->episodes = $data['episodes'] ?? null;
+        $anime->css_id = $data['css_id'] ?? null;
+        $anime->images_id = $data['images_id'] ?? null;
+
+        $anime->save();
+
+        return view('add')->with(['saved_title' => $data['title']]);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Anime  $anime
-     * @return \Illuminate\Http\Response
-     */
     public function show(Anime $anime)
     {
         return $anime;
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Anime  $anime
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, Anime $anime)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Anime  $anime
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Anime $anime)
     {
         //
